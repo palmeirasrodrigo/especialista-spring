@@ -1,0 +1,1 @@
+update restaurant set active = true;
