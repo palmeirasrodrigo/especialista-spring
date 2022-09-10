@@ -104,6 +104,19 @@ public class Demand extends AbstractAggregateRoot<Demand> {
         registerEvent(new CanceledOrderEvent(this));
     }
 
+    public boolean canBeConfirm() {
+        return getStatus().canChangeTo(StatusDemand.CONFIRMADO);
+    }
+
+    public boolean canBeDelivered() {
+        return getStatus().canChangeTo(StatusDemand.ENTREGUE);
+    }
+
+    public boolean canBeCancel() {
+        return getStatus().canChangeTo(StatusDemand.CANCELADO);
+    }
+
+
     private void setStatus(StatusDemand novoStatus) {
         if (getStatus().cannotChangeTo(novoStatus)) {
             throw new BusinessException(

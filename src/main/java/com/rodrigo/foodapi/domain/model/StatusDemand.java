@@ -24,4 +24,8 @@ public enum StatusDemand {
     public boolean cannotChangeTo(StatusDemand newStatus) {
         return !newStatus.previousStatus.contains(this);
     }
+
+    public boolean canChangeTo(StatusDemand newStatus) {
+        return !cannotChangeTo(newStatus);
+    }
 }

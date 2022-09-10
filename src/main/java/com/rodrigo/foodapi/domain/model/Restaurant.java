@@ -99,6 +99,39 @@ public class Restaurant {
         setOpen(false);
     }
 
+
+    public boolean isOpen() {
+        return this.open;
+    }
+
+    public boolean isClose() {
+        return !isOpen();
+    }
+
+    public boolean isInactive() {
+        return !isActive();
+    }
+
+    public boolean isActive() {
+        return this.active;
+    }
+
+    public boolean openingAllowed() {
+        return isActive() && isClose();
+    }
+
+    public boolean activationAllowed() {
+        return isInactive();
+    }
+
+    public boolean inactivationAllowed() {
+        return isActive();
+    }
+
+    public boolean closingAllowed() {
+        return isOpen();
+    }
+
     public void removeFormPayment(FormPayment formPayment) {
         getFormPayments().remove(formPayment);
     }
