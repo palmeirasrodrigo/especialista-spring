@@ -7,6 +7,7 @@ import com.rodrigo.foodapi.domain.exception.BusinessException;
 import com.rodrigo.foodapi.domain.exception.EntityInUseException;
 import com.rodrigo.foodapi.domain.exception.EntityNotFoundException;
 import com.rodrigo.foodapi.domain.exception.ValidationException;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,7 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @ControllerAdvice
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
@@ -134,7 +136,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         ProblemType problemType = ProblemType.SYSTEM_ERROR;
         String detail = MSG_END_USER_GENERIC_ERROR;
 
-        ex.printStackTrace();
+        log.error(ex.getMessage(), ex);
 
         Problem problem = createProblemBuilder(status, problemType, detail)
                 .userMessage(detail)
